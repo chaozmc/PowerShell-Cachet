@@ -25,7 +25,9 @@ function Get-CachetMetricPoints {
         [Parameter(Mandatory=$true)]
         [int]$ID,
         [Parameter(Mandatory=$true)]
-        [string]$APIToken
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
 
     $splat = @{
@@ -34,6 +36,7 @@ function Get-CachetMetricPoints {
         'ID' = $ID
         'Method' = 'Get';
         'ApiToken' = $APIToken
+        'Protocol' = $Protocol
     }
 
     Invoke-CachetRequest @splat

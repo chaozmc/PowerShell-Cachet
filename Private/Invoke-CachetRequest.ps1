@@ -5,7 +5,9 @@ function Invoke-CachetRequest {
         [string]$Method,
         [string]$ID = $null,
         [hashtable]$Body,
-        [string]$ApiToken
+        [string]$ApiToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
 
     dynamicparam {
@@ -51,7 +53,7 @@ function Invoke-CachetRequest {
     process {
         $splat = @{
             'Method' = $Method
-            'Uri' = $Settings.URIs.$Resource -f $Server, $ID
+            'Uri' = $Settings.URIs.$Resource -f $Protocol, $Server, $ID
             'Headers' = @{
                 'X-Cachet-Token'=$ApiToken
                 'Content-Type'='application/json'

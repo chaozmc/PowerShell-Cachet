@@ -11,7 +11,9 @@ function New-CachetIncidentUpdate {
         [Parameter(Mandatory=$true)]
         [string]$Message,
         [Parameter(Mandatory=$true)]
-        [string]$ApiToken
+        [string]$ApiToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
 
     $splat = @{
@@ -24,6 +26,7 @@ function New-CachetIncidentUpdate {
             'message' = $Message
         }
         ApiToken = $ApiToken
+        Protocol = $Protocol
     }
     
     Invoke-CachetRequest @splat

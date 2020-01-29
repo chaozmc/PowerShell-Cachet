@@ -27,14 +27,16 @@
         [string]$ComponentName = 'localhost',
         [ValidateSet('Operational','PerformanceIssues','PartialOutage','MajorOutage')]
         [string]$Status,
-        [string]$APIToken
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
     
-    $component = Get-CachetInfo -CachetServer $CachetServer -Info components -APIToken $APIToken | Where-Object -FilterScript {$_.name -eq $ComponentName}
+    $component = Get-CachetInfo -CachetServer $CachetServer -Info components -APIToken $APIToken -Protocol $Protocol | Where-Object -FilterScript {$_.name -eq $ComponentName}
     if ($component) {
         $statId = Get-CachetStatusId -StatusName $Status
         $splat = @{
-            'Uri' = 'http://{0}/api/v1/components/{1}' -f $CachetServer, $component.id;
+            'Uri' = '{0}://{1}/api/v1/components/{2}' -f $Protocol, $CachetServer, $component.id;
             'Method' = 'Put';
             'Body' = '{{"status":{0}}}' -f $statId;
             'Headers' = @{

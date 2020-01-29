@@ -15,19 +15,27 @@
     .Parameter APIToken
      The API token key found within a Cachet user's profile.
 
+    .Parameter UseSSL
+     Boolean to define if Server should be contacted by SSL
+
     .Example
      # Get a list of all components
      Get-CachetInfo -CachetServer Cachet01 -Info components -APIToken FmzZg9GGQoanGnBbuyNT
     #>
     param (
+        [Parameter(mandatory=$true)]
         [string]$CachetServer,
+        [Parameter(mandatory=$true)]
         [ValidateSet('components','incidents','metrics','subscribers')]
         [string]$Info,
-        [string]$APIToken
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
+    
 
     $splat = @{
-    'Uri' = 'http://{0}/api/v1/{1}' -f $CachetServer,$Info;
+    'Uri' = '{0}://{1}/api/v1/{2}' -f $Protocol,$CachetServer,$Info;
     'Method' = 'Get';
     'Headers' = @{
         'X-Cachet-Token'=$APIToken;

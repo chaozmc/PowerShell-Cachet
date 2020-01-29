@@ -1,13 +1,13 @@
 @{
     'URIs' = @{
-        'Components' = 'http://{0}/api/v1/components/{1}'
-        'ComponentGroups' = 'http://{0}/api/v1/components/groups/{1}'
-        'Incidents' = 'http://{0}/api/v1/incidents/{1}'
-        'IncidentUpdates' = 'http://{0}/api/v1/incidents/{1}/updates'
-        'Metrics' = 'http://{0}/api/v1/metrics/{1}'
-        'MetricPoints' = 'http://{0}/api/v1/metrics/{1}/points'
-        'Ping' = 'http://{0}/api/v1/ping'
-        'Subscribers' = 'http://{0}/api/v1/subscribers/{1}'
-        'Version' = 'http://{0}/api/v1/version'
+        'Components' = '{0}://{1}/api/v1/components/{2}'
+        'ComponentGroups' = '{0}://{1}/api/v1/components/groups/{2}'
+        'Incidents' = '{0}://{1}/api/v1/incidents/{2}'
+        'IncidentUpdates' = '{0}://{1}/api/v1/incidents/{2}/updates'
+        'Metrics' = '{0}://{1}/api/v1/metrics/{2}'
+        'MetricPoints' = '{0}://{1}/api/v1/metrics/{2}/points'
+        'Ping' = '{0}://{1}/api/v1/ping'
+        'Subscribers' = '{0}://{1}/api/v1/subscribers/{2}'
+        'Version' = '{0}://{1}/api/v1/version'
     }
 }

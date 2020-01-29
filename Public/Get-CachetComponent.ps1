@@ -24,7 +24,9 @@ function Get-CachetComponent {
         [string]$Server = 'localhost',
         [int]$ID,
         [Parameter(Mandatory=$true)]
-        [string]$APIToken
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
 
     $splat = @{
@@ -32,10 +34,11 @@ function Get-CachetComponent {
         'Resource' = 'Components'
         'Method' = 'Get';
         'ApiToken' = $APIToken
+        'Protocol' = $Protocol
     }
 
     if ($ID) {
-        Write-Verbose 'Adding ID to splat' -Verbose
+        Write-Verbose 'Adding ID to splat'
         $splat.ID = $ID
     }
 

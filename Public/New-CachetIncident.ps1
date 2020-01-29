@@ -50,10 +50,12 @@
         $ComponentStatus,
         [ValidateSet('true','false')]
         $Notify,
-        [string]$APIToken
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
     
-    $component = Get-CachetInfo -CachetServer $Server -Info components -APIToken $APIToken | Where-Object -FilterScript {$_.Name -eq $ComponentName}
+    $component = Get-CachetInfo -CachetServer $Server -Info components -APIToken $APIToken -Protocol $Protocol | Where-Object -FilterScript {$_.Name -eq $ComponentName}
 
     if ($component) {
 
@@ -75,6 +77,7 @@
             'Body' = $Body;
             'Method' = 'Post';
             'ApiToken' = $APIToken
+            'Protocol' = $Protocol
         }
 
         Invoke-CachetRequest @splat

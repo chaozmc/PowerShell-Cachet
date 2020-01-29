@@ -23,8 +23,11 @@ function Get-CachetMetric {
         [Parameter(Mandatory=$true)]    
         [string]$Server = 'localhost',
         [int]$ID,
-        [Parameter(Mandatory=$true)]
-        [string]$APIToken
+        [Parameter(Mandatory=$false)]
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
+
     )
 
     $splat = @{
@@ -32,6 +35,7 @@ function Get-CachetMetric {
         'Resource' = 'Metrics'
         'Method' = 'Get';
         'ApiToken' = $APIToken
+        'Protocol' = $Protocol
     }
 
     if ($ID) {

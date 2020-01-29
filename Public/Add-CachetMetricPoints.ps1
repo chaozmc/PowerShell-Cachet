@@ -26,7 +26,9 @@ function Add-CachetMetricPoints {
         [string]$Server = 'localhost',
         [int]$ID,
         [double]$Value,
-        [string]$APIToken
+        [string]$APIToken,
+        [ValidateSet('http','https')]
+        [string]$Protocol = 'http'
     )
 
     $splat = @{
@@ -38,6 +40,7 @@ function Add-CachetMetricPoints {
             value = $Value
         }
         'ApiToken' = $APIToken
+        'Protocol' = $Protocol
     }
     
     Invoke-CachetRequest @splat
