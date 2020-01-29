@@ -63,7 +63,7 @@ function Invoke-CachetRequest {
             $json = ConvertTo-Json -InputObject $Body
             $splat.Body = $json
         }
-        $result = Invoke-RestMethod @splat
+        $result = Invoke-RestMethod @splat -UseBasicParsing
 
         if (-not ($result.GetType().Name -eq 'PSCustomObject')) {
             # Remove arguments with empty names as they will cause the conversion from json to an object to fail

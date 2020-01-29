@@ -43,7 +43,7 @@
         }
     }
 
-    $results = Invoke-WebRequest @splat
+    $results = Invoke-WebRequest @splat -UseBasicParsing
     [void][System.Reflection.Assembly]::LoadWithPartialName("System.Web.Extensions")
     $deserializer = New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
     $deserializer.MaxJsonLength = [int]::MaxValue

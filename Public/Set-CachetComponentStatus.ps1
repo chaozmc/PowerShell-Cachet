@@ -44,7 +44,7 @@
                 'Content-Type'='application/json'
             }
         }
-        Invoke-WebRequest @splat
+        Invoke-WebRequest @splat -UseBasicParsing
     }
     else {
         Write-Warning -Message "Could not find component named $ComponentName."
