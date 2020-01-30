@@ -44,15 +44,7 @@
     }
 
     $results = Invoke-WebRequest @splat -UseBasicParsing
-    [void][System.Reflection.Assembly]::LoadWithPartialName("System.Web.Extensions")
-    $deserializer = New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
-    $deserializer.MaxJsonLength = [int]::MaxValue
-    $components = $deserializer.DeserializeObject($results.Content)
-    $components.data.foreach{
-        $obj = New-Object PSObject
-        foreach ($item in $_.Keys) {
-            $obj | Add-Member -MemberType NoteProperty -Name $item -Value $_.Item($item)
-            }
-        $obj
-    }
+    $components = ConvertFrom-Json -InputObject $results.Content
+    $components.data
+    
 }
